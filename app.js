@@ -1,0 +1,93 @@
+const password = document.querySelector(".container-input-password");
+const email = document.querySelector(".container-input-email");
+const button = document.querySelector(".container-button button");
+
+// Via ce script vous spécifiez que l'email doit :
+// - contenir une arobase et un point
+// - avant la présence de l'arobase nous pouvons trouver, des lettres quelconques
+//     (en minuscule ou majuscule), n'importe quel chiffre, et les caractères "-" ou "_"
+// - aprés l'arobase, la vérification reste la même mais on interdit la présence de "_"
+//     et il faut impérativement au moins de caractères entre l'arobase et le point
+// - aprés le point, nous devons une succession de 2 ou 3 caractères doivent être
+//     présentes afin de pouvoir valider l'adresse email.
+
+function validationEmail(email) {
+  var check = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,3}$/;
+  if (check.exec(email) == null) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function validationPassword(password) {
+  var check = /^[A-Za-z]\w{8,50}$/;
+  if (check.exec(password) == null) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+let isValidateEmail;
+let isValidatePassword;
+
+email.addEventListener("input", (e) => {
+  isValidateEmail = validationEmail(e.target.value);
+  if (isValidateEmail == false) {
+    e.target.classList.remove("done");
+    e.target.classList.add("error");
+  } else {
+    e.target.classList.remove("error");
+    e.target.classList.add("done");
+  }
+  checkIsButtonDone();
+  if (e.target.value === "") {
+    e.target.classList.remove("done");
+    e.target.classList.remove("error");
+  }
+});
+
+password.addEventListener("input", (e) => {
+  isValidatePassword = validationPassword(e.target.value);
+  if (isValidatePassword == false) {
+    e.target.classList.remove("done");
+    e.target.classList.add("error");
+  } else {
+    e.target.classList.remove("error");
+    e.target.classList.add("done");
+  }
+  checkIsButtonDone();
+  if (e.target.value === "") {
+    e.target.classList.remove("done");
+    e.target.classList.remove("error");
+  }
+});
+
+function checkIsButtonDone() {
+  if (isValidateEmail && isValidatePassword) {
+    button.classList.add("correct");
+  } else {
+    button.classList.remove("correct");
+  }
+}
+
+window.addEventListener("mousemove", (e) => {
+  button.addEventListener("mouseenter", () => {
+    if (!isValidateEmail || !isValidatePassword) {
+      if (e.movementX > 0) {
+        if (e.pageX < window.innerWidth / 2) {
+          button.style.transform = `translateX(${e.pageX / 3}px)`;
+        } else {
+          button.style.transform = `translateX(-${e.pageX / 3}px)`;
+        }
+      } else {
+        if (e.pageX < window.innerWidth / 2) {
+          button.style.transform = `translateX(${e.pageX / 3}px)`;
+        } else {
+          button.style.transform = `translateX(-${e.pageX / 3}px)`;
+        }
+      }
+    }
+  });
+});
