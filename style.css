@@ -60,10 +60,10 @@ body {
   border-color: #bcbec3;
 }
 .container-input input.error {
-  border: 1px solid red;
+  border: 3px solid red;
 }
 .container-input input.done {
-  border: 1px solid green;
+  border: 3px solid green;
 }
 .container-button {
   width: 100%;
