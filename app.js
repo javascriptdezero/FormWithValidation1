@@ -12,7 +12,7 @@ const button = document.querySelector(".container-button button");
 //     présentes afin de pouvoir valider l'adresse email.
 
 function validationEmail(email) {
-  var check = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,3}$/;
+  const check = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,3}$/;
   if (check.exec(email) == null) {
     return false;
   } else {
@@ -21,7 +21,7 @@ function validationEmail(email) {
 }
 
 function validationPassword(password) {
-  var check = /^[A-Za-z]\w{8,50}$/;
+  const check = /^[A-Za-z]\w{8,50}$/;
   if (check.exec(password) == null) {
     return false;
   } else {
